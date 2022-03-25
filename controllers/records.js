@@ -1,9 +1,11 @@
-function getRecord(req, res) {
-  console.log(req.body)
-  const fetchData = fetch(`https://api.discogs.com/releases/249504`)
-  .then(res => res.json())
-}
+import axios from 'axios'
 
+function getRecord(req, res) {
+  console.log('hello');
+  axios.get(`https://api.discogs.com/database/search?q=BlackSabbath&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
+  .then(response => {res.json(response.data)})
+  
+  }
 
 export {
   getRecord
