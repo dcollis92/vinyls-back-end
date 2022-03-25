@@ -19,7 +19,9 @@ function show(req, res) {
   })
 }
 
-// function getRecords
+
+
+// function addRecord
 // fetch request to discogs
 // res - data from api
 
@@ -27,5 +29,5 @@ function show(req, res) {
 //response sends data as json
 //services client -issues request fetch/records
 // response back to client, set as state
-
+// updated profile 
 export { index }
