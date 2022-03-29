@@ -1,4 +1,5 @@
 import { Profile } from '../models/profile.js'
+import { Record } from '../models/record.js'
 
 function index(req, res) {
   Profile.find({})
@@ -21,13 +22,14 @@ function show(req, res) {
 
 
 
-// function addRecord
-// fetch request to discogs
-// res - data from api
+function addRecord(req, res) {
+  console.log(req.body)
+}
+
 
 //const data = await discogs api
 //response sends data as json
 //services client -issues request fetch/records
 // response back to client, set as state
 // updated profile 
-export { index }
+export { index, show, addRecord }
