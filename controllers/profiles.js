@@ -24,6 +24,20 @@ function show(req, res) {
 
 function addRecord(req, res) {
   console.log(req.body)
+  const record = new Record(req.body)
+  record.save()
+  Profile.findById(req.user.profile)
+  .then(profile => {
+    profile.records.push(record)
+    profile.save()
+    .then(updatedProfile => {
+      res.json(updatedProfile)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 }
 
 
