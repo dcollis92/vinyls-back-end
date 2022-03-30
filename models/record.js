@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const recordSchema = new Schema({
   cover_image: String,
-  label: String,
+  //label: String,
   master_id: Number,
   master_url: String,
   resource_url: String,
