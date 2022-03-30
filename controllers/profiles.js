@@ -41,11 +41,11 @@ function addRecord(req, res) {
 }
 
 function removeRecord(req, res) {
-  console.log(req.params.recordMaster_id)
+  console.log(req.params.record._id)
   Profile.findById(req.user.profile) 
   .then(profile => {
     const idx = profile.records.findIndex(record =>
-      record.master_id === req.params.recordMaster_id)
+      record._id === req.params.record._id)
     profile.records[idx].remove()
     profile.save()
     .then(savedProfile => {
