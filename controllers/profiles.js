@@ -40,10 +40,33 @@ function addRecord(req, res) {
   })
 }
 
+function removeRecord(req, res) {
+  console.log(req.params.recordMaster_id)
+  Profile.findById(req.user.profile) 
+  .then(profile => {
+    const idx = profile.records.findIndex(record =>
+      record.master_id === req.params.recordMaster_id)
+    profile.records[idx].remove()
+    profile.save()
+    .then(savedProfile => {
+      res.json(savedProfile)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
 
 //const data = await discogs api
 //response sends data as json
 //services client -issues request fetch/records
 // response back to client, set as state
 // updated profile 
-export { index, show, addRecord }
+
+export { 
+  index, 
+  show, 
+  addRecord,
+  removeRecord
+}
