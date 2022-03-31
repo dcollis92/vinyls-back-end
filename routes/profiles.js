@@ -14,7 +14,8 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.get('/:id', checkAuth, profilesCtrl.show)
 router.post('/addRecord', checkAuth, profilesCtrl.addRecord)
-router.patch('/recordId', checkAuth, profilesCtrl.removeRecord)
+router.delete('/:id/:recordsId', checkAuth, profilesCtrl.removeRecord)
+
 
 
 export { router }
