@@ -10,6 +10,8 @@ router.get('/:id', recordsCtrl.recordDetails)
 
 router.use(decodeUserFromToken)
 router.post('/:id/comments', checkAuth, recordsCtrl.createComment)
+router.put('/:id/comments/:commentId', checkAuth, recordsCtrl.editComment)
+router.delete('/:id/comments/:commentId', checkAuth, recordsCtrl.deleteComment)
 
 export {
   router

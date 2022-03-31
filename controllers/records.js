@@ -57,8 +57,35 @@ function recordDetails(req, res) {
     }
   }
 
+const editComment = async (req, res) => {
+  try {
+    const updatedRecord = await Record.findById(req.params.recordId)
+    const idx = updatedRecord.comments.findIndex((comment) =>
+      comment._id.equals(req.params.commentId)
+      )
+
+      await updatedPost.save()
+      return res.status(200).json(updatedPost)  
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+const deleteComment = async(req, res) => {
+  try {
+    const post = await Post.findById(req.params.recordId)
+    record.comments.remove({_id: req.params.commentId})
+    await record.save()
+    return res.status(204).end()
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 export {
   createComment,
+  editComment,
+  deleteComment,
   getRecord,
   addRating,
   getDbRecords,
