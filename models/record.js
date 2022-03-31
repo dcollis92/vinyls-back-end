@@ -9,6 +9,16 @@ const ratingSchema = new Schema({
   timestamps: true
 })
 
+const commentSchema = new Schema({
+  commentText: {
+    type: String,
+    required: true
+  },
+  commenter: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }
+}, {
+  timestamps: true
+})
+
 const recordSchema = new Schema({
   cover_image: String,
   //label: String,
@@ -19,6 +29,7 @@ const recordSchema = new Schema({
   title: String,
   uri: String,
   year: Number,
+  comments: [commentSchema],
   ratings: [ratingSchema]
 }, {
   timestamps: true
@@ -26,8 +37,10 @@ const recordSchema = new Schema({
 
 const Record = mongoose.model('Record', recordSchema)
 const Rating = mongoose.model("Rating", ratingSchema)
+const Comment = mongoose.model("Comment", commentSchema)
 
 export {
   Record,
-  Rating
+  Rating, 
+  Comment
 }
