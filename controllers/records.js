@@ -7,6 +7,18 @@ function getRecord(req, res) {
     .then(response => {res.json(response.data)})
   }
 
+function recordDetails(req, res) {
+    console.log(req.params.id)
+    Record.findById(req.params.id)
+    .then(record => res.json(record))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  }
+
+
+
   /* --- NEEDS REFACTORING --- */
   function addRating(req, res) {
     Record.findById(req.params.id)
@@ -23,7 +35,23 @@ function getRecord(req, res) {
     })
   }
 
+  const createComment = async (req, res) => {
+    try {
+      req.body.comment = req.user.profile
+      const record = await Record.findById(req.params.id)
+      record.comments.push(req.body)
+      await record.save()
+      const newComment = record.comments[record.comments.length -1 ]
+      return res.status(201).json(newComment)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  }
+
 export {
+  createComment,
   getRecord,
   addRating,
+  recordDetails
 }
