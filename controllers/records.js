@@ -7,6 +7,17 @@ function getRecord(req, res) {
     .then(response => {res.json(response.data)})
   }
 
+
+  function getDbRecords(req, res) {
+    Record.find({})
+    .then(records => res.json(records))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  }
+
+
   /* --- NEEDS REFACTORING --- */
   function addRating(req, res) {
     Record.findById(req.params.id)
@@ -26,4 +37,5 @@ function getRecord(req, res) {
 export {
   getRecord,
   addRating,
+  getDbRecords
 }
