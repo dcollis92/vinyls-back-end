@@ -52,7 +52,7 @@ function removeRecord(req, res) {
   //   profile.save()
   //   .then(savedProfile => {
   //     res.json(savedProfile)
-  //   })
+  //   }) 
   // })
   // .catch(err => {
   //   console.log(err)
