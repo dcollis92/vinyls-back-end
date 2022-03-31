@@ -24,13 +24,14 @@ function show(req, res) {
 
 
 function addRecord(req, res) {
-  console.log(req.body)
+  console.log(req.body, "al")
   const record = new Record(req.body)
   record.save()
   Profile.findById(req.user.profile)
   .then(profile => {
-    profile.records.push(record)
-    profile.save()
+    console.log(record)
+    profile.records.push(record._id)
+        profile.save()
     .then(updatedProfile => {
       res.json(updatedProfile)
     })
@@ -42,18 +43,20 @@ function addRecord(req, res) {
 }
 
 function removeRecord(req, res) {
-  console.log('record id to be deleted', req.params.record._id)
-  Profile.findById(req.user.profile) 
+  console.log('record id to be deleted', req.params.recordId)
+  Profile.findById(req.user.profile)
+  
   .then(profile => {
-    const idx = profile.records.findIndex(record =>
-      record._id === req.params.record._id)
-      console.log('hi', profile.records[idx]);
-    profile.records[idx].remove()
-    profile.save()
-    .then(savedProfile => {
-      res.json(savedProfile)
-    }) 
-  })
+   
+    const newCollection = profile.records.filter(record => 
+      record._id.toString() !== req.params.recordId)
+      profile.records = newCollection
+      profile.save()
+   
+      .then(savedProfile => {
+        res.json(savedProfile)
+      })    
+  })  
   .catch(err => {
     console.log(err, "err")
     res.status(500).json(err)
