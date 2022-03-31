@@ -43,21 +43,21 @@ function addRecord(req, res) {
 
 function removeRecord(req, res) {
   console.log('record id to be deleted', req.params.record._id)
-  // Profile.findById(req.user.profile) 
-  // .then(profile => {
-  //   const idx = profile.records.findIndex(record =>
-  //     record._id === req.params.record._id)
-  //     console.log('hi', profile.records[idx]);
-  //   profile.records[idx].remove()
-  //   profile.save()
-  //   .then(savedProfile => {
-  //     res.json(savedProfile)
-  //   }) 
-  // })
-  // .catch(err => {
-  //   console.log(err)
-  //   res.status(500).json(err)
-  // })
+  Profile.findById(req.user.profile) 
+  .then(profile => {
+    const idx = profile.records.findIndex(record =>
+      record._id === req.params.record._id)
+      console.log('hi', profile.records[idx]);
+    profile.records[idx].remove()
+    profile.save()
+    .then(savedProfile => {
+      res.json(savedProfile)
+    }) 
+  })
+  .catch(err => {
+    console.log(err, "err")
+    res.status(500).json(err)
+  })
 }
 
 //const data = await discogs api
