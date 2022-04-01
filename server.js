@@ -2,7 +2,6 @@ import 'dotenv/config.js'
 import express from 'express'
 import logger from 'morgan'
 import cors from 'cors'
-//import disconnect from 'disconnect'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
@@ -11,11 +10,8 @@ import { router as recordsRouter } from './routes/records.js'
 import('./config/database.js')
 
 const app = express()
-//const Discogs = require('disconnect').Client;
-
 
 app.use(cors())
-//app.use(disconnect())
 app.use(logger('dev'))
 app.use(express.json())
 
