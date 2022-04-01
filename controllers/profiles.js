@@ -10,8 +10,7 @@ function index(req, res) {
   })
 }
 
-function show(req, res) {
-  console.log(req.params.id)
+function show(req, res) {  
   Profile.findById(req.params.id)
   .populate("records")
   .then(profile => res.json(profile))
@@ -21,17 +20,13 @@ function show(req, res) {
   })
 }
 
-
-
-function addRecord(req, res) {
-  console.log(req.body, "al")
+function addRecord(req, res) {  
   const record = new Record(req.body)
   record.save()
   Profile.findById(req.user.profile)
-  .then(profile => {
-    console.log(record)
+  .then(profile => {    
     profile.records.push(record._id)
-        profile.save()
+    profile.save()
     .then(updatedProfile => {
       res.json(updatedProfile)
     })
@@ -42,32 +37,22 @@ function addRecord(req, res) {
   })
 }
 
-function removeRecord(req, res) {
-  console.log('record id to be deleted', req.params.recordId)
-  Profile.findById(req.user.profile)
-  
-  .then(profile => {
-   
+function removeRecord(req, res) {  
+  Profile.findById(req.user.profile)  
+  .then(profile => {   
     const newCollection = profile.records.filter(record => 
-      record._id.toString() !== req.params.recordId)
-      profile.records = newCollection
-      profile.save()
-   
-      .then(savedProfile => {
-        res.json(savedProfile)
-      })    
+    record._id.toString() !== req.params.recordId)
+    profile.records = newCollection
+    profile.save()   
+    .then(savedProfile => {
+      res.json(savedProfile)
+    })    
   })  
   .catch(err => {
     console.log(err, "err")
     res.status(500).json(err)
   })
 }
-
-//const data = await discogs api
-//response sends data as json
-//services client -issues request fetch/records
-// response back to client, set as state
-// updated profile 
 
 export { 
   index, 

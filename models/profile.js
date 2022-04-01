@@ -7,7 +7,7 @@ const profileSchema = new mongoose.Schema({
   name: String,
   records: [{ type: Schema.Types.ObjectId, ref: 'Record' }]
 },{
-    timestamps: true,
+  timestamps: true,
 })
 
 const Profile = mongoose.model('Profile', profileSchema)
