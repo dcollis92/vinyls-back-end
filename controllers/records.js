@@ -25,7 +25,7 @@ function recordDetails(req, res) {
 }
 
 
-const addRating = async (req, res) {
+const addRating = async (req, res) => {
   console.log(req.body)
   try {
    req.body.rating = req.user.profile
