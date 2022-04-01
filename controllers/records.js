@@ -44,13 +44,13 @@ function recordDetails(req, res) {
   }
 
   const createComment = async (req, res) => {
+    console.log(req.body);
     try {
       req.body.comment = req.user.profile
       const record = await Record.findById(req.params.id)
       record.comments.push(req.body)
       await record.save()
-      const newComment = record.comments[record.comments.length -1 ]
-      return res.status(201).json(newComment)
+      return res.status(201).json(record)
     } catch (err) {
       console.log(err)
       res.status(500).json(err)
