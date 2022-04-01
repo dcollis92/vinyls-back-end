@@ -53,14 +53,19 @@ const createComment = async (req, res) => {
 }
 
 const editComment = async (req, res) => {
+  console.log(req.params);
+  console.log(req.body);
   try {
-    const updatedRecord = await Record.findById(req.params.recordId)
+    const updatedRecord = await Record.findById(req.params.id)
+   console.log(updatedRecord);
     const idx = updatedRecord.comments.findIndex((comment) =>
       comment._id.equals(req.params.commentId)
       )
-
-      await updatedPost.save()
-      return res.status(200).json(updatedPost)  
+      console.log(idx);
+      updatedRecord.comments[idx] = req.body
+      await updatedRecord.save()
+      console.log(updatedRecord)
+      return res.status(200).json(updatedRecord)  
   } catch (err) {
     res.status(500).json(err)
   }
