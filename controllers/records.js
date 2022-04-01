@@ -25,10 +25,10 @@ function recordDetails(req, res) {
 }
 
 
-const addRating = async (req, res) {
-  console.log(req.body)
+const addRating = async (req, res) => {
+  console.log(req.body, "aaahahahahhahahahahahahahahahahahaha")
   try {
-   req.body.rating = req.user.profile
+  //  req.body.rating = req.user.profile
    const record = await Record.findById(req.params.id)
    record.ratings.push(req.body)
     await record.save()
