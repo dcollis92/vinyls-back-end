@@ -20,8 +20,7 @@ const commentSchema = new Schema({
 })
 
 const recordSchema = new Schema({
-  cover_image: String,
-  //label: String,
+  cover_image: String, 
   master_id: Number,
   master_url: String,
   resource_url: String,
