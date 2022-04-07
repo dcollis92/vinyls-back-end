@@ -40,9 +40,9 @@ const addRating = async (req, res) => {
   }    
 }
 
-const createComment = async (req, res) => {  
+const createComment = async (req, res) => {
   try {
-    req.body.comment = req.user.profile
+    req.body.commenter = req.user.profile
     const record = await Record.findById(req.params.id)
     record.comments.push(req.body)
     await record.save()
