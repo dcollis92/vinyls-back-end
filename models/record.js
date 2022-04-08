@@ -28,6 +28,7 @@ const recordSchema = new Schema({
   title: String,
   uri: String,
   year: Number,
+  label: String,
   comments: [commentSchema],
   ratings: [ratingSchema]
 }, {
